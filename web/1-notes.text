@@ -1,0 +1,4 @@
+Starting a react project with typescript:
+
+  yarn create react-app web --template typescript
+
