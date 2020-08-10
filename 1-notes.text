@@ -1,0 +1,176 @@
+
+
+Starting a react project with typescript:
+
+        yarn create react-app web --template typescript
+
+
+
+
+
+REM & responsiveness:
+
+        :root {
+          font-size: 60%;
+        }
+
+        @media (min-width: 700px) {
+          :root {
+            font-size: 62.5%;
+          }
+        }
+
+
+
+
+
+
+CSS Grid:
+
+        #page-landing-content {
+
+          display: grid;
+
+          grid-template-areas:
+            "logo heo hero"
+            "buttons buttons total"
+          ;
+
+          grid-template-rows: 350px 1fr;
+          grid-template-columns: 2fr 1fr 1fr;
+
+        }
+
+        .logo-contaier {
+          grid-area: logo;
+        }
+
+        .hero-image {
+          grid-area: hero;
+        }
+
+        .buttons-container {
+          grid-area: buttons;
+        }
+
+        .total-connections {
+          grid-area: total;
+        }
+
+  React Router with Typescript:
+
+    dev dependency: -D
+
+      yarn add @types/react-router-dom -D
+
+
+  In order to get Routes working with SPA, must use <Link to=''> ( from { Link } 'react-router-dom' ), not <a>.
+
+  
+
+  CLASS 2:
+
+  back-end setup
+
+    Terminarl
+    yarn init -y
+
+    it creates package.json:
+
+    {
+      "name": "server",
+      "version": "1.0.0",
+      "main": "index.js",
+      "license": "MIT"
+    }
+
+    Add Typescript:
+      yarn add typescript -D
+
+    Create config file:
+      yarn tsc --init
+
+      Successfully created a tsconfig.json file
+
+      Edit it:
+          insted of:
+          "target": "es5"
+
+          use:
+          "target": "es2017"
+
+
+      also:
+      yarn add ts-node-dev -D
+
+      allow node to run TS and auto refresh the server when changes happen.
+
+      server.ts:
+
+
+      package scripts:
+
+
+      "scripts": {
+        "start": "ts-node-dev src/server.ts"
+      },
+
+      or:
+
+      "scripts": {
+        "start": "tsnd src/server.ts"
+      },
+
+
+
+  "scripts": {
+    "start": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+  },
+
+
+  Express: microframework
+  yarn add express
+
+  JS packages running in TS project:
+
+    Try `npm install @types/express` if it exists or add a new declaration (.d.ts) file containing `declare module 'express';`ts(7016)
+
+ yarn add @types/express -D
+
+
+DB:
+
+yarn add knex sqlite3
+
+  "scripts": {
+    "knex:migrate": "knex --knexfile.ts migrate:latest"
+  },
+
+
+
+
+// 1. request body: create or update data
+
+// 2. route params: identify resource to delete or update:
+// '/users/:id'
+// http://localhost:3333/users/1
+
+// 3. query params: list data, filter, order, etc
+// http://localhost:3333/users/page=1
+// http://localhost:3333/users?page=2&sort=name
+
+app.delete('/users/:id', (request, response) => {
+
+  //console.log(request.body)
+  //console.log(request.params)
+  // console.log(request.query)
+
+  const users = [
+    { name: 'Paulo', age: 41 },
+    { name: 'Pedro', age: 47 }
+  ];
+
+  return response.json(users)
+});
+
+app.listen(3333);
